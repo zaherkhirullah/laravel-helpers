@@ -73,10 +73,10 @@ if (!function_exists('store_file')) {
 
 if (!function_exists('upload_image')) {
     /**
-     * @param      $request
-     * @param      $field_name
-     * @param      $folder
-     * @param      $old_image
+     * @param $request
+     * @param $field_name
+     * @param $folder
+     * @param $old_image
      *
      * @return string
      */
@@ -126,11 +126,11 @@ if (!function_exists('upload_images')) {
 
 if (!function_exists('attach_files')) {
     /**
-     * @param      $request
-     * @param      $field_name
-     * @param      $folder
-     * @param      $row
-     * @param      $type
+     * @param $request
+     * @param $field_name
+     * @param $folder
+     * @param $row
+     * @param $type
      *
      * @return array
      */
@@ -236,11 +236,11 @@ if (!function_exists('uploadFromTiny')) {
 
 if (!function_exists('fancyImage')) {
     /**
-     * @param      $prefix
-     * @param      $imageName
-     * @param int  $width
-     * @param      $alt
-     * @param      $className
+     * @param     $prefix
+     * @param     $imageName
+     * @param int $width
+     * @param     $alt
+     * @param     $className
      *
      * @return string
      */
