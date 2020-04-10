@@ -269,7 +269,6 @@ if (!function_exists('show_record')) {
 
         return response()->json($item, 200);
     }
-
 }
 /*---------------------------------- </> --------------------------------*/
 
@@ -571,7 +570,6 @@ if (!function_exists('addTrashButton')) {
 
         return "<a href='{$href}' class='btn btn-sm btn-danger float-right text-capitalize' id='{$id}'> <i class='fas {$icon}'></i> {$title} </a>";
     }
-
 }
 /*---------------------------------- </> --------------------------------*/
 

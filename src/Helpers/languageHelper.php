@@ -64,9 +64,9 @@ if (!function_exists('default_lang')) {
 
 if (!function_exists('langAttr')) {
     /**
-     * @param      $attr
-     * @param      $lang
-     * @param      $prefix
+     * @param $attr
+     * @param $lang
+     * @param $prefix
      *
      * @return string
      */
