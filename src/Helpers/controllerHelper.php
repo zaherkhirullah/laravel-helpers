@@ -108,36 +108,33 @@ if (!function_exists('callAPI')) {
     {
         // $data must be json when method is post
         $curl = curl_init();
+        if (!$curl) {
+            return false;
+        }
+
         switch ($method) {
             case 'POST':
-                $CURL_OPT = CURLOPT_POST;
-                $VALUE = 1;
+                curl_setopt($curl, CURLOPT_POST, 1);
                 break;
             case 'PUT':
-                $CURL_OPT = CURLOPT_CUSTOMREQUEST;
-                $VALUE = 'PUT';
+                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
                 break;
-            default:
-                if ($data) {
-                    $url = sprintf('%s?%s', $url, http_build_query($data));
-                }
+        }
+        if ($data) {
+            curl_setopt($curl, CURLOPT_POST, $data);
+            $url = sprintf('%s?%s', $url, http_build_query($data));
         }
 
         $headers = get_api_headers();
         // OPTIONS:
-        if (isset($CURL_OPT) and isset($VALUE)) {
-            curl_setopt(/** @scrutinizer ignore-type */ $curl, $CURL_OPT, $VALUE);
-        }
-        if (isset($CURL_OPT) and $data) {
-            curl_setopt(/** @scrutinizer ignore-type */ $curl, $CURL_OPT, $data);
-        }
-        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_URL, $url);
-        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+        curl_setopt($curl, CURLOPT_URL, $url);
+        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
         // EXECUTE:
-        $result = curl_exec(/** @scrutinizer ignore-type */ $curl);
+        $result = curl_exec($curl);
 //        if (!$result) {
 //            die('Connection Failure');
 //        }
@@ -557,32 +554,24 @@ if (!function_exists('addTrashButton')) {
     function addTrashButton($permissionName, $href = null, $params = null)
     {
         $request_has_trashed = has_trash_param() ? false : true;
-        if ($request_has_trashed) {
-            if (!is_can_restore($permissionName) and !is_can_force_delete($permissionName)) {
-                return '';
-            }
-            $href = url("/admin/trash/{$href}");
-            if ($params) {
-                $href .= $params;
-            }
-            $title = $title ?? __('button.deleted_records');
-            $id = $id ?? 'trash_data';
-            $icon = $icon ?? 'fa-trash-alt';
-        } else {
-            if (!is_can_show($permissionName) and !is_can_show_all($permissionName)) {
-                return '';
-            }
-            $href = url("/admin/{$href}");
-            if ($params) {
-                $href .= $params;
-            }
-            $title = $title ?? __('button.active_records');
-            $id = $id ?? 'all_data';
-            $icon = $icon ?? 'fa-list';
+        if ($request_has_trashed and !is_can_restore($permissionName) and !is_can_force_delete($permissionName)) {
+            return '';
+        } elseif (!is_can_show($permissionName) and !is_can_show_all($permissionName)) {
+            return '';
         }
+        $defaultHref = $request_has_trashed ? "/admin/trash/{$href}" : "/admin/{$href}";
+        $defaultTitle = $request_has_trashed ? __('button.deleted_records') : __('button.active_records');
+        $defaultId = $request_has_trashed ? 'trash_data' : 'all_data';
+        $defaultIcon = $request_has_trashed ? 'fa-trash-alt' : 'fa-list';
+
+        $href = url($defaultHref).$params ?? '';
+        $title = $title ?? $defaultTitle;
+        $id = $id ?? $defaultId;
+        $icon = $icon ?? $defaultIcon;
 
         return "<a href='{$href}' class='btn btn-sm btn-danger float-right text-capitalize' id='{$id}'> <i class='fas {$icon}'></i> {$title} </a>";
     }
+
 }
 /*---------------------------------- </> --------------------------------*/
 
