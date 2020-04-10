@@ -6,7 +6,7 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/hayrullah/laravel-helpers.svg?style=flat-square)](https://packagist.org/packages/hayrullah/laravel-helpers)
 [![GitHub issues](https://img.shields.io/github/issues/zaherkhirullah/laravel-helpers)](https://github.com/zaherkhirullah/laravel-helpers/issues)
 [![GitHub forks](https://img.shields.io/github/forks/zaherkhirullah/laravel-helpers)](https://github.com/zaherkhirullah/laravel-helpers/network)
-![PHP Composer](https://github.com/zaherkhirullah/laravel-helpers/workflows/PHP%20Composer/badge.svg)
+![CI](https://github.com/zaherkhirullah/laravel-helpers/workflows/CI/badge.svg)
 [![GitHub license](https://img.shields.io/github/license/zaherkhirullah/laravel-helpers)](https://github.com/zaherkhirullah/laravel-helpers)
 [![Quality Score](https://img.shields.io/scrutinizer/g/zaherkhirullah/laravel-helpers.svg?style=flat-square)](https://scrutinizer-ci.com/g/zaherkhirullah/laravel-helpers)
 [![StyleCI](https://styleci.io/repos/253813301/shield)](https://styleci.io/repos/253813301)
