@@ -6,7 +6,7 @@ use Hayrullah\Helper\Commands;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
-class LemProvider extends ServiceProvider
+class HelperServiceProvider extends ServiceProvider
 {
     protected $HELPERS_PATH = 'Helpers/';
     protected $RESOURCE_PATH = 'resources/';
@@ -36,7 +36,6 @@ class LemProvider extends ServiceProvider
             }
         }
     }
-
 
     /**
      * Bootstrap services.

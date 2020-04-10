@@ -3,7 +3,7 @@
 /**
  * Author: Zahir Hayrullah
  * create date :  10/04/2020  07:00 AM
- * Last Modified Date: 10/04/2020  07:00 AM
+ * Last Modified Date: 10/04/2020  07:00 AM.
  */
 
 use Illuminate\Contracts\Auth\Authenticatable;
