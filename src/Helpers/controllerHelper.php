@@ -30,7 +30,7 @@ if (!function_exists('get_auth_user')) {
 
 if (!function_exists('user_avatar')) {
     /**
-     * @param null $user
+     * @param  $user
      *
      * @return mixed
      */
@@ -43,7 +43,7 @@ if (!function_exists('user_avatar')) {
 
 if (!function_exists('user_roles')) {
     /**
-     * @param null $user
+     * @param  $user
      *
      * @return mixed
      */
@@ -95,7 +95,7 @@ if (!function_exists('callAPI')) {
     /**
      * @param      $method
      * @param      $url
-     * @param null $data
+     * @param      $data
      *
      * @return bool|string
      */
@@ -227,7 +227,7 @@ if (!function_exists('show_record')) {
      * @param      $modelName
      * @param      $id
      * @param      $permissionName
-     * @param null $with
+     * @param      $with
      *
      * @return JsonResponse|void
      */
@@ -283,8 +283,8 @@ if (!function_exists('increment_visits')) {
 
 if (!function_exists('json_not_found_item')) {
     /**
-     * @param null $item_or_page
-     * @param null $code
+     * @param  $item_or_page
+     * @param  $code
      *
      * @return JsonResponse
      */
@@ -380,7 +380,7 @@ if (!function_exists('trashInfo')) {
 if (!function_exists('hiddenSm')) {
     /**
      * @param      $data
-     * @param null $className
+     * @param      $className
      *
      * @return string
      */
@@ -444,7 +444,7 @@ if (!function_exists('slugLink')) {
 if (!function_exists('actionLinks')) {
     /**
      * @param      $row
-     * @param null $prefix
+     * @param      $prefix
      * @param      $user_can_edit
      * @param      $user_can_delete
      *
@@ -575,9 +575,9 @@ if (!function_exists('addTrashButton')) {
 if (!function_exists('activeRecordButton')) {
     /**
      * @param      $permissionName
-     * @param null $href
-     * @param null $params
-     * @param null $className
+     * @param      $href
+     * @param      $params
+     * @param      $className
      *
      * @return string
      */
@@ -633,7 +633,7 @@ if (!function_exists('activeButton')) {
 if (!function_exists('copyBtn')) {
     /**
      * @param      $shorten_link
-     * @param null $className
+     * @param      $className
      *
      * @return string
      */

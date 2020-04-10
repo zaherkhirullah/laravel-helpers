@@ -51,11 +51,8 @@ if (!function_exists('is_default_lang')) {
 /*---------------------------------- </> ----------------------------------*/
 
 if (!function_exists('default_lang')) {
+
     /**
-     * @param      $attr
-     * @param      $lang
-     * @param null $prefix
-     *
      * @return string
      */
     function default_lang()
@@ -69,7 +66,7 @@ if (!function_exists('langAttr')) {
     /**
      * @param      $attr
      * @param      $lang
-     * @param null $prefix
+     * @param      $prefix
      *
      * @return string
      */

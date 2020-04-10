@@ -76,7 +76,7 @@ if (!function_exists('upload_image')) {
      * @param      $request
      * @param      $field_name
      * @param      $folder
-     * @param null $old_image
+     * @param      $old_image
      *
      * @return string
      */
@@ -129,8 +129,8 @@ if (!function_exists('attach_files')) {
      * @param      $request
      * @param      $field_name
      * @param      $folder
-     * @param null $row
-     * @param null $type
+     * @param      $row
+     * @param      $type
      *
      * @return array
      */
@@ -239,8 +239,8 @@ if (!function_exists('fancyImage')) {
      * @param      $prefix
      * @param      $imageName
      * @param int  $width
-     * @param null $alt
-     * @param null $className
+     * @param      $alt
+     * @param      $className
      *
      * @return string
      */

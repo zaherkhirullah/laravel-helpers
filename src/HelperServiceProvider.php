@@ -9,8 +9,6 @@ use Illuminate\Support\Str;
 class HelperServiceProvider extends ServiceProvider
 {
     protected $HELPERS_PATH = 'Helpers/';
-    protected $RESOURCE_PATH = 'resources/';
-    protected $CONFIG_PATH = 'config/';
 
     /**
      * Register services.
@@ -44,10 +42,6 @@ class HelperServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-//        $this->loadTranslations();
-        // load config files
-        $this->loadConfig();
-
         // load command files
         $this->registerCommands();
 
@@ -55,19 +49,6 @@ class HelperServiceProvider extends ServiceProvider
         $this->registerResources();
     }
 
-    private function loadTranslations()
-    {
-        $translationsPath = $this->packagePath($this->RESOURCE_PATH.'lang');
-        $this->loadTranslationsFrom($translationsPath, 'lem');
-    }
-
-    private function loadConfig()
-    {
-        $configPath = $this->packagePath($this->CONFIG_PATH.'lem.php');
-        $this->mergeConfigFrom($configPath, 'lem');
-        $configPath = $this->packagePath($this->CONFIG_PATH.'adminlte.php');
-        $this->mergeConfigFrom($configPath, 'adminlte');
-    }
 
     /**
      * Register commands.
