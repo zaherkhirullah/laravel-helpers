@@ -1,6 +1,6 @@
 <?php
 
-namespace Hayrullah\Helper\Commands;
+namespace Hayrullah\Helpers\Commands;
 
 use Illuminate\Console\Command;
 
