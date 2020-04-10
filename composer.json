@@ -1,5 +1,5 @@
 {
-  "name": "hayrullah/helpers",
+  "name": "hayrullah/laravel-helpers",
   "description": "Helper functions use to upload files and delete, force delete, restore global functions.",
   "type": "library",
   "license": "MIT",

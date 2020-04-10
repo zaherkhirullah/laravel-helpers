@@ -1,9 +1,9 @@
 # Laravel Errors Management System 
 
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/hayrullah/helpers.svg?style=flat-square)](https://packagist.org/packages/hayrullah/helpers)
-![](https://github.com/hayrullah/helpers/workflows/Run%20Tests/badge.svg?branch=master)
-[![Total Downloads](https://img.shields.io/packagist/dt/hayrullah/helpers.svg?style=flat-square)](https://packagist.org/packages/hayrullah/helpers)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/hayrullah/laravel-helpers.svg?style=flat-square)](https://packagist.org/packages/hayrullah/laravel-helpers)
+![](https://github.com/hayrullah/laravel-helpers/workflows/Run%20Tests/badge.svg?branch=master)
+[![Total Downloads](https://img.shields.io/packagist/dt/hayrullah/laravel-helpers.svg?style=flat-square)](https://packagist.org/packages/hayrullah/laravel-helpers)
 [![GitHub issues](https://img.shields.io/github/issues/zaherkhirullah/laravel-helpers)](https://github.com/zaherkhirullah/laravel-helpers/issues)
 [![GitHub forks](https://img.shields.io/github/forks/zaherkhirullah/laravel-helpers)](https://github.com/zaherkhirullah/laravel-helpers/network)
 ![PHP Composer](https://github.com/zaherkhirullah/laravel-helpers/workflows/PHP%20Composer/badge.svg)
@@ -20,14 +20,14 @@ Helper functions use to upload files and delete, force delete, restore global fu
 
 ## Documentation, Installation, and Usage Instructions
 
-See the [DOCUMENTATION](https://packagist.org/packages/hayrullah/helpers) for detailed installation and usage instructions.
+See the [DOCUMENTATION](https://packagist.org/packages/hayrullah/laravel-helpers) for detailed installation and usage instructions.
 
 ### INSTALLATION STEPS
 
 <i> Step 1 </i>
 
 ```
-$ composer require hayrullah/helpers
+$ composer require hayrullah/laravel-helpers
  ```
 
 <i> Step 2 </i>
