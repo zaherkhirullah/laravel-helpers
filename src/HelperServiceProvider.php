@@ -2,7 +2,7 @@
 
 namespace Hayrullah\Helpers;
 
-use Hayrullah\Helper\Commands;
+use Hayrullah\Helpers\Commands;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Str;
 
