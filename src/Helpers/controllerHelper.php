@@ -7,20 +7,25 @@
  */
 
 use Illuminate\Contracts\Auth\Authenticatable;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Str;
+use Illuminate\View\View;
 
 if (!function_exists('get_auth_user')) {
     /**
+     * @param $user
+     *
      * @return Authenticatable|null
      */
-    function get_auth_user()
+    function get_auth_user($user = null)
     {
-        $key = 'auth_user';
+        $key = $user ? "auth_user_{$user->id}" : 'auth_user';
         if (!Session::has($key)) {
             // 1-session again
-            Session::put($key, auth()->user());
+            $user = $user ?? auth()->user();
+            Session::put($key, $user);
         }
 
         return session($key);
@@ -36,7 +41,7 @@ if (!function_exists('user_avatar')) {
      */
     function user_avatar($user = null)
     {
-        return $user ? $user->avatar : get_auth_user()->avatar;
+        return optional(get_auth_user($user))->avatar;
     }
 }
 /*---------------------------------- </> --------------------------------*/
@@ -49,7 +54,7 @@ if (!function_exists('user_roles')) {
      */
     function user_roles($user = null)
     {
-        return $user ? $user->roles : get_auth_user()->roles;
+        return optional(get_auth_user($user))->roles;
     }
 }
 /*---------------------------------- </> --------------------------------*/
@@ -101,27 +106,52 @@ if (!function_exists('callAPI')) {
      */
     function callAPI($method, $url, $data = null)
     {
+        // $data must be json when method is post
         $curl = curl_init();
         switch ($method) {
             case 'POST':
-                curl_setopt($curl, CURLOPT_POST, 1);
-                // $data must be json when method is post
-                if ($data) {
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                }
+                $CURL_OPT = CURLOPT_POST;
+                $VALUE = 1;
                 break;
             case 'PUT':
-                curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'PUT');
-                if ($data) {
-                    curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
-                }
+                $CURL_OPT = CURLOPT_CUSTOMREQUEST;
+                $VALUE = 'PUT';
                 break;
             default:
                 if ($data) {
                     $url = sprintf('%s?%s', $url, http_build_query($data));
                 }
         }
-        $headers = ['Content-Type: application/json'];
+
+        $headers = get_api_headers();
+        // OPTIONS:
+        if (isset($CURL_OPT) and isset($VALUE)) {
+            curl_setopt(/** @scrutinizer ignore-type */ $curl, $CURL_OPT, $VALUE);
+        }
+        if (isset($CURL_OPT) and $data) {
+            curl_setopt(/** @scrutinizer ignore-type */ $curl, $CURL_OPT, $data);
+        }
+        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_URL, $url);
+        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt(/** @scrutinizer ignore-type */ $curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+
+        // EXECUTE:
+        $result = curl_exec(/** @scrutinizer ignore-type */ $curl);
+//        if (!$result) {
+//            die('Connection Failure');
+//        }
+        curl_close($curl);
+
+        return $result;
+    }
+}
+/*---------------------------------- </> --------------------------------*/
+
+if (!function_exists('get_api_headers')) {
+    function get_api_headers($headers = [])
+    {
+        $headers[] = 'Content-Type: application/json';
         if (array_key_exists('HTTP_HOST', $_SERVER)) {
             $headers[] = 'ORIGIN: '.$_SERVER['HTTP_HOST'];
         }
@@ -131,20 +161,8 @@ if (!function_exists('callAPI')) {
         if (array_key_exists('HTTP_ORIGIN', $_SERVER)) {
             $headers[] = 'ORIGIN: '.$_SERVER['HTTP_ORIGIN'];
         }
-        // OPTIONS:
-        curl_setopt($curl, CURLOPT_URL, $url);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-        curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
 
-        // EXECUTE:
-        $result = curl_exec($curl);
-        if (!$result) {
-            die('Connection Failure');
-        }
-        curl_close($curl);
-
-        return $result;
+        return $headers;
     }
 }
 /*---------------------------------- </> --------------------------------*/
@@ -229,36 +247,32 @@ if (!function_exists('show_record')) {
      * @param      $permissionName
      * @param      $with
      *
-     * @return JsonResponse|void
+     * @return Factory|JsonResponse|View|void
      */
-    function show_record($request, $modelName, $id, $permissionName, $with = null)
+    function show_record($request, $modelName, $id, $permissionName = null, $with = null)
     {
-        if ($request->ajax()) {
+        if (!$request->ajax()) {
+            // if Request not Ajax
             if (!is_can_show($permissionName) and !is_can_show_all($permissionName)) {
-                return json_not_authorize();
+                return view('backend.errors.401');
             }
-            if (!is_numeric($id)) {
-                return json_not_found_item('Page');
-            }
-            $ClassName = get_class_name($modelName);
-            if ($with) {
-                $item = $ClassName::with($with)->find($id);
-            } else {
-                $item = $ClassName::find($id);
-            }
-            if (!$item) {
-                return json_not_found_item();
-            }
-
-            return response()->json($item, 200);
+            abort(404);
         }
-        // if Request not Ajax
         if (!is_can_show($permissionName) and !is_can_show_all($permissionName)) {
-            return view('backend.errors.401');
+            return json_not_authorize();
+        }
+        if (!is_numeric($id)) {
+            return json_not_found_item('Page');
+        }
+        $ClassName = get_class_name($modelName);
+        $item = $ClassName::with($with)->find($id);
+        if (!$item) {
+            return json_not_found_item();
         }
 
-        return abort(404);
+        return response()->json($item, 200);
     }
+
 }
 /*---------------------------------- </> --------------------------------*/
 

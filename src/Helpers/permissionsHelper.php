@@ -28,10 +28,8 @@ if (!function_exists('check_user_authorize')) {
      */
     function check_user_authorize($permissionName = null, $trash = null)
     {
-        if ($trash) {
-            if (!is_can_restore($permissionName) and !is_can_force_delete($permissionName)) {
-                return false;
-            }
+        if ($trash and !is_can_restore($permissionName) and !is_can_force_delete($permissionName)) {
+            return false;
         }
         if (!is_can_show($permissionName) and !is_can_show_all($permissionName)) {
             return false;
@@ -50,7 +48,7 @@ if (!function_exists('is_can_create')) {
      */
     function is_can_create($permissionName = null)
     {
-        return is_can("create-{$permissionName}");
+        return $permissionName ? is_can("create-{$permissionName}") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -63,7 +61,7 @@ if (!function_exists('is_can_edit')) {
      */
     function is_can_edit($permissionName = null)
     {
-        return is_can("edit-{$permissionName}");
+        return $permissionName ? is_can("edit-{$permissionName}") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -76,7 +74,7 @@ if (!function_exists('is_can_delete')) {
      */
     function is_can_delete($permissionName = null)
     {
-        return is_can("delete-{$permissionName}");
+        return $permissionName ? is_can("delete-{$permissionName}") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -89,7 +87,7 @@ if (!function_exists('is_can_restore')) {
      */
     function is_can_restore($permissionName = null)
     {
-        return is_can("restore-{$permissionName}");
+        return $permissionName ? is_can("restore-{$permissionName}") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -102,7 +100,7 @@ if (!function_exists('is_can_force_delete')) {
      */
     function is_can_force_delete($permissionName = null)
     {
-        return is_can("force-delete-{$permissionName}");
+        return $permissionName ? is_can("force-delete-{$permissionName}") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -115,7 +113,7 @@ if (!function_exists('is_can_show')) {
      */
     function is_can_show($permissionName = null)
     {
-        return is_can("show-{$permissionName}");
+        return $permissionName ? is_can("show-{$permissionName}") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -128,7 +126,7 @@ if (!function_exists('is_can_show_all')) {
      */
     function is_can_show_all($permissionName = null)
     {
-        return is_can("show-all-{$permissionName}");
+        return $permissionName ? is_can("show-all-{$permissionName}") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -141,7 +139,7 @@ if (!function_exists('is_can_activate')) {
      */
     function is_can_activate($permissionName = null)
     {
-        return is_can("activate-$permissionName");
+        return $permissionName ? is_can("activate-$permissionName") : true;
     }
 }
 /*---------------------------------- </> ----------------------------------*/
@@ -154,11 +152,11 @@ if (!function_exists('is_can')) {
      */
     function is_can($permissionName = null)
     {
+//        $last = substr($permissionName, -1);
+//        if ($last == '-') {
+//            return true;
+//        }
         $user = get_auth_user();
-        $last = substr($permissionName, -1);
-        if ($last == '-') {
-            return true;
-        }
         if ($user and $user->can($permissionName)) {
             return true;
         }
