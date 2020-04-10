@@ -3,7 +3,7 @@
 /**
  * Author: Zahir Hayrullah
  * create date :  10/04/2020  07:00 AM
- * Last Modified Date: 10/04/2020  07:00 AM
+ * Last Modified Date: 10/04/2020  07:00 AM.
  */
 
 use Illuminate\Support\Facades\File;
@@ -236,11 +236,11 @@ if (!function_exists('uploadFromTiny')) {
 
 if (!function_exists('fancyImage')) {
     /**
-     * @param        $prefix
-     * @param        $imageName
-     * @param int    $width
-     * @param null   $alt
-     * @param null   $className
+     * @param      $prefix
+     * @param      $imageName
+     * @param int  $width
+     * @param null $alt
+     * @param null $className
      *
      * @return string
      */
