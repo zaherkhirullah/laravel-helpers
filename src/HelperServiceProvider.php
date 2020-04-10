@@ -81,7 +81,7 @@ class HelperServiceProvider extends ServiceProvider
 
             $this->publishes(
                 [
-                    $this->packagePath($this->HELPERS_PATH) => app_path('Helpers/vendor/hyr-helpers'),
+                    $this->packagePath($this->HELPERS_PATH."helper.php") => app_path('Helpers/vendor/hyr-helpers.php'),
                 ],
                 'hyr-helpers'
             );
