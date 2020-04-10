@@ -36,6 +36,16 @@ class HelperServiceProvider extends ServiceProvider
     }
 
     /**
+     * @param $path
+     *
+     * @return string
+     */
+    private function packagePath($path)
+    {
+        return __DIR__."/$path";
+    }
+
+    /**
      * Bootstrap services.
      *
      * @return void
@@ -48,7 +58,6 @@ class HelperServiceProvider extends ServiceProvider
         // load publisher files
         $this->registerResources();
     }
-
 
     /**
      * Register commands.
@@ -78,16 +87,6 @@ class HelperServiceProvider extends ServiceProvider
                 'hyr-helpers'
             );
         }
-    }
-
-    /**
-     * @param $path
-     *
-     * @return string
-     */
-    private function packagePath($path)
-    {
-        return __DIR__."/$path";
     }
 
     /**
