@@ -98,9 +98,9 @@ if (!function_exists('jsonOutput')) {
 
 if (!function_exists('callAPI')) {
     /**
-     * @param      $method
-     * @param      $url
-     * @param      $data
+     * @param $method
+     * @param $url
+     * @param $data
      *
      * @return bool|string
      */
@@ -238,11 +238,11 @@ if (!function_exists('force_delete_record')) {
 
 if (!function_exists('show_record')) {
     /**
-     * @param      $request
-     * @param      $modelName
-     * @param      $id
-     * @param      $permissionName
-     * @param      $with
+     * @param $request
+     * @param $modelName
+     * @param $id
+     * @param $permissionName
+     * @param $with
      *
      * @return Factory|JsonResponse|View|void
      */
@@ -390,8 +390,8 @@ if (!function_exists('trashInfo')) {
 
 if (!function_exists('hiddenSm')) {
     /**
-     * @param      $data
-     * @param      $className
+     * @param $data
+     * @param $className
      *
      * @return string
      */
@@ -454,10 +454,10 @@ if (!function_exists('slugLink')) {
 
 if (!function_exists('actionLinks')) {
     /**
-     * @param      $row
-     * @param      $prefix
-     * @param      $user_can_edit
-     * @param      $user_can_delete
+     * @param $row
+     * @param $prefix
+     * @param $user_can_edit
+     * @param $user_can_delete
      *
      * @return string
      */
@@ -577,10 +577,10 @@ if (!function_exists('addTrashButton')) {
 
 if (!function_exists('activeRecordButton')) {
     /**
-     * @param      $permissionName
-     * @param      $href
-     * @param      $params
-     * @param      $className
+     * @param $permissionName
+     * @param $href
+     * @param $params
+     * @param $className
      *
      * @return string
      */
@@ -635,8 +635,8 @@ if (!function_exists('activeButton')) {
 
 if (!function_exists('copyBtn')) {
     /**
-     * @param      $shorten_link
-     * @param      $className
+     * @param $shorten_link
+     * @param $className
      *
      * @return string
      */
