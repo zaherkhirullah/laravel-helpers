@@ -11,7 +11,7 @@ class CacheCommand extends Command
      *
      * @var string
      */
-    protected $signature = 'hyr:cache-all';
+    protected $signature = 'cache:all';
 
     /**
      * The console command description.
