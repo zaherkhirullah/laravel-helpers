@@ -64,7 +64,7 @@ if (!function_exists('get_from_cache_by_slug')) {
     function get_from_cache_by_slug($slug, $model = "App\\Page")
     {
 
-        $key = getCacheKey($slug, $model);
+        $key = get_cache_key($slug, $model);
         // caching project if not existing
         if (!cache()->has($key)) {
             cache()->rememberForever($key, function () use ($model, $slug) {
