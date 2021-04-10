@@ -129,8 +129,7 @@ if (!function_exists('attach_files')) {
      * @param $request
      * @param $field_name
      * @param $folder
-     * @param $row
-     * @param $type
+     * @param  null  $row
      *
      * @return array
      */
@@ -152,7 +151,7 @@ if (!function_exists('attach_files')) {
             // save file in folder and return name
             $storage_name = store_file($path, $file);
 
-            $arrFileNames[] = saveAttachments($request, $row, $original_name, $storage_name, $folder, $size, $type);
+            $arrFileNames[] = save_attachments($request, $row, $original_name, $storage_name, $folder, $size, $type);
         }
 
         return $arrFileNames;
@@ -160,8 +159,8 @@ if (!function_exists('attach_files')) {
 }
 /*---------------------------------- </> ----------------------------------*/
 
-if (!function_exists('saveAttachments')) {
-    function saveAttachments($request, $row, $original_name, $storage_name, $folder, $size, $type)
+if (!function_exists('save_attachments')) {
+    function save_attachments($request, $row, $original_name, $storage_name, $folder, $size, $type)
     {
 //        $file = new Attachment();
 //        $file->file_name = $original_name;
@@ -186,8 +185,8 @@ if (!function_exists('unlink_file')) {
     /**
      * for delete file from directory.
      *
-     * @param $fileName   ( obj->file )
-     * @param $folderName ('uploads/folderName')
+     * @param $fileName  ( obj->file )
+     * @param $folderName  ('uploads/folderName')
      */
     function unlink_file($fileName, $folderName)
     {
@@ -203,15 +202,15 @@ if (!function_exists('unlink_file')) {
 }
 /*---------------------------------- </> ----------------------------------*/
 
-if (!function_exists('uploadFromTiny')) {
+if (!function_exists('upload_from_tiny')) {
     /**
-     * @param        $request
-     * @param string $field_name
-     * @param        $folder
+     * @param $request
+     * @param $field_name
+     * @param $folder
      *
      * @return mixed
      */
-    function uploadFromTiny($request, $field_name, $folder)
+    function upload_from_tiny($request, $field_name, $folder)
     {
         try {
             $folder = "uploads/{$folder}";
@@ -234,17 +233,17 @@ if (!function_exists('uploadFromTiny')) {
 }
 /*---------------------------------- </> ----------------------------------*/
 
-if (!function_exists('fancyImage')) {
+if (!function_exists('fancy_image')) {
     /**
      * @param     $prefix
      * @param     $imageName
-     * @param int $width
+     * @param  int  $width
      * @param     $alt
      * @param     $className
      *
      * @return string
      */
-    function fancyImage($prefix, $imageName, $width = 100, $alt = null, $className = null)
+    function fancy_image($prefix, $imageName, $width = 100, $alt = null, $className = null)
     {
         $className = $className != null ? $className : 'img-thumbnail';
         $height = $className == 'img-circle' ? $width : 'auto';

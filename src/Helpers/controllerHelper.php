@@ -59,13 +59,13 @@ if (!function_exists('user_roles')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('getArrayValidationErrors')) {
+if (!function_exists('get_array_validation_errors')) {
     /**
      * @param $validation
      *
      * @return array
      */
-    function getArrayValidationErrors($validation)
+    function get_array_validation_errors($validation)
     {
         $error_array = [];
         if ($validation) {
@@ -79,14 +79,14 @@ if (!function_exists('getArrayValidationErrors')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('jsonOutput')) {
+if (!function_exists('json_output')) {
     /**
      * @param $error_array
      * @param $success_output
      *
      * @return array
      */
-    function jsonOutput($error_array, $success_output = null)
+    function json_output($error_array, $success_output = null)
     {
         return [
             'error'   => $error_array,
@@ -96,7 +96,7 @@ if (!function_exists('jsonOutput')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('callAPI')) {
+if (!function_exists('call_api')) {
     /**
      * @param $method
      * @param $url
@@ -104,7 +104,7 @@ if (!function_exists('callAPI')) {
      *
      * @return bool|string
      */
-    function callAPI($method, $url, $data = null)
+    function call_api($method, $url, $data = null)
     {
         // $data must be json when method is post
         $curl = curl_init();
@@ -277,7 +277,7 @@ if (!function_exists('increment_visits')) {
      * increment visits.
      *
      * @param        $row
-     * @param string $key is $key_visits_slug
+     * @param  string  $key  is $key_visits_slug
      */
     function increment_visits($row, $key = 'page')
     {
@@ -323,7 +323,6 @@ if (!function_exists('json_not_authorize')) {
 if (!function_exists('has_trash_param')) {
     /**
      * // This function to check url contains trash or not.
-     *
      * @return string
      */
     function has_trash_param()
@@ -338,13 +337,13 @@ if (!function_exists('has_trash_param')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('editorInfo')) {
+if (!function_exists('editor_info')) {
     /**
      * @param $_page
      *
      * @return string
      */
-    function editorInfo($_page)
+    function editor_info($_page)
     {
         $output = '';
         $creator = $_page->createdBy ? $_page->createdBy->name : ' system ';
@@ -355,11 +354,11 @@ if (!function_exists('editorInfo')) {
         $modified_title_date = __('edition_date', ['date' => $_page->updated_at]);
 
         $output .= '';
-        $output .= "<p class='user-date-info'><span data-toggle='tooltip' title='{$created_title}'> <i class='fas fa-plus-square'></i> ".hiddenSm($created_title).' </span>';
-        $output .= " - <span data-toggle='tooltip' title='{$created_title_date}'> <i class='fas fa-calendar-plus'></i> ".hiddenSm(optional($_page->created_at)->format('Y-m-d')).' </span></p>';
+        $output .= "<p class='user-date-info'><span data-toggle='tooltip' title='{$created_title}'> <i class='fas fa-plus-square'></i> ".hidden_sm($created_title).' </span>';
+        $output .= " - <span data-toggle='tooltip' title='{$created_title_date}'> <i class='fas fa-calendar-plus'></i> ".hidden_sm(optional($_page->created_at)->format('Y-m-d')).' </span></p>';
         if ($editor != null) {
-            $output .= "<p class='user-date-info'><span data-toggle='tooltip' title='{$modified_title}'> <i class='fas fa-edit'></i> ".hiddenSm($modified_title).' </span>';
-            $output .= " - <span data-toggle='tooltip' title='{$modified_title_date}'> <i class='fas fa-calendar'></i> ".hiddenSm(optional($_page->updated_at)->format('Y-m-d')).' </span></p>';
+            $output .= "<p class='user-date-info'><span data-toggle='tooltip' title='{$modified_title}'> <i class='fas fa-edit'></i> ".hidden_sm($modified_title).' </span>';
+            $output .= " - <span data-toggle='tooltip' title='{$modified_title_date}'> <i class='fas fa-calendar'></i> ".hidden_sm(optional($_page->updated_at)->format('Y-m-d')).' </span></p>';
         }
 
         return $output;
@@ -367,19 +366,19 @@ if (!function_exists('editorInfo')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('trashInfo')) {
+if (!function_exists('trash_info')) {
     /**
      * @param $_page
      *
      * @return string
      */
-    function trashInfo($_page)
+    function trash_info($_page)
     {
         $output = '';
         $deletedBy = $_page->deletedBy ? $_page->deletedBy->name : ' system ';
         $output .= "<p class='user-date-info'>";
-        $output .= " <span data-toggle='tooltip' title='تم حذفه بواسطة {$deletedBy}'> <i class='fas fa-trash'></i> ".hiddenSm('تم حذفه بواسطة :'.$deletedBy).' </span>';
-        $output .= " - <span data-toggle='tooltip' title='تاريخ الحذف {$_page->deleted_at}'> <i class='fas fa-calendar-times'></i> ".hiddenSm('بتاريخ :'.optional($_page->deleted_at)->format('Y-m-d')).' </span>';
+        $output .= " <span data-toggle='tooltip' title='تم حذفه بواسطة {$deletedBy}'> <i class='fas fa-trash'></i> ".hidden_sm('تم حذفه بواسطة :'.$deletedBy).' </span>';
+        $output .= " - <span data-toggle='tooltip' title='تاريخ الحذف {$_page->deleted_at}'> <i class='fas fa-calendar-times'></i> ".hidden_sm('بتاريخ :'.optional($_page->deleted_at)->format('Y-m-d')).' </span>';
         $output .= '</p>';
 
         return $output;
@@ -387,14 +386,14 @@ if (!function_exists('trashInfo')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('hiddenSm')) {
+if (!function_exists('hidden_sm')) {
     /**
      * @param $data
      * @param $className
      *
      * @return string
      */
-    function hiddenSm($data, $className = null)
+    function hidden_sm($data, $className = null)
     {
         $className = $className ?? 'd-none d-md-inline d-lg-inline d-xl-inline';
 
@@ -408,7 +407,7 @@ if (!function_exists('titleLink')) {
      * @param        $prefix
      * @param        $row
      * @param        $can_edit
-     * @param string $attr
+     * @param  string  $attr
      *
      * @return string
      */
@@ -434,8 +433,8 @@ if (!function_exists('titleLink')) {
 if (!function_exists('slugLink')) {
     /**
      * @param        $row
-     * @param string $prefix
-     * @param null   $url
+     * @param  string  $prefix
+     * @param  null  $url
      *
      * @return string
      */
@@ -451,7 +450,7 @@ if (!function_exists('slugLink')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('actionLinks')) {
+if (!function_exists('action_links')) {
     /**
      * @param $row
      * @param $prefix
@@ -460,7 +459,7 @@ if (!function_exists('actionLinks')) {
      *
      * @return string
      */
-    function actionLinks($row, $prefix, $user_can_edit, $user_can_delete)
+    function action_links($row, $prefix, $user_can_edit, $user_can_delete)
     {
         //    if ($modelName == null) {
         //      $modelName = str_replace('admin/', '', $prefix);
@@ -486,7 +485,7 @@ if (!function_exists('actionLinks')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('trashActionLinks')) {
+if (!function_exists('trash_action_links')) {
     /**
      * @param $row
      * @param $user_can_restore
@@ -494,7 +493,7 @@ if (!function_exists('trashActionLinks')) {
      *
      * @return string
      */
-    function trashActionLinks($row, $user_can_restore, $user_can_force_delete)
+    function trash_action_links($row, $user_can_restore, $user_can_force_delete)
     {
         $output = '';
         if (auth()->check()) {
@@ -513,8 +512,18 @@ if (!function_exists('trashActionLinks')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('addTableButton')) {
-    function addTableButton($modelName, $title = null, $href = null, $name = null, $id = null, $icon = null)
+if (!function_exists('add_table_button')) {
+    /**
+     * @param $modelName
+     * @param  null  $title
+     * @param  null  $href
+     * @param  null  $name
+     * @param  null  $id
+     * @param  null  $icon
+     *
+     * @return string
+     */
+    function add_table_button($modelName, $title = null, $href = null, $name = null, $id = null, $icon = null)
     {
         if (!is_can_create($modelName)) {
             return '';
@@ -549,8 +558,15 @@ if (!function_exists('addTableButton')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('addTrashButton')) {
-    function addTrashButton($permissionName, $href = null, $params = null)
+if (!function_exists('add_trash_button')) {
+    /**
+     * @param $permissionName
+     * @param  null  $href
+     * @param  null  $params
+     *
+     * @return string
+     */
+    function add_trash_button($permissionName, $href = null, $params = null)
     {
         $request_has_trashed = has_trash_param() ? false : true;
         if ($request_has_trashed and !is_can_restore($permissionName) and !is_can_force_delete($permissionName)) {
@@ -573,7 +589,7 @@ if (!function_exists('addTrashButton')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('activeRecordButton')) {
+if (!function_exists('active_record_button')) {
     /**
      * @param $permissionName
      * @param $href
@@ -582,7 +598,7 @@ if (!function_exists('activeRecordButton')) {
      *
      * @return string
      */
-    function activeRecordButton($permissionName, $href = null, $params = null, $className = null)
+    function active_record_button($permissionName, $href = null, $params = null, $className = null)
     {
         if (request()->has('active') and (request()->get('active') === 'false')) {
             $href = url("/admin/{$href}");
@@ -609,8 +625,8 @@ if (!function_exists('activeRecordButton')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('activeButton')) {
-    function activeButton($item = null)
+if (!function_exists('active_button')) {
+    function active_button($item = null)
     {
         if ($item) {
             $checked = old('active', $item->active) != 1 ? '' : 'checked';
@@ -631,14 +647,14 @@ if (!function_exists('activeButton')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('copyBtn')) {
+if (!function_exists('copy_button')) {
     /**
      * @param $shorten_link
      * @param $className
      *
      * @return string
      */
-    function copyBtn($shorten_link, $className = null)
+    function copy_button($shorten_link, $className = null)
     {
         $className = $className ?? 'float-right';
 
@@ -648,11 +664,11 @@ if (!function_exists('copyBtn')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('backButton')) {
+if (!function_exists('back_button')) {
     /**
      * @return string
      */
-    function backButton()
+    function back_button()
     {
         $url = url()->previous();
         $title = __('back');
@@ -662,23 +678,8 @@ if (!function_exists('backButton')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('ClassName')) {
-    function ClassName($modelName)
-    {
-        // check name if content \\ dont add App as prefix model
-        if (strpos($modelName, '\\') === false) {
-            $modelName = "\App\\{$modelName}";
-        }
-        // if(!(class_exists($modelName))) {
-        //   return "$modelName model Not Found.";
-        // }
-        return $modelName;
-    }
-}
-/*---------------------------------- </> --------------------------------*/
-
-if (!function_exists('viewOrError')) {
-    function viewOrError($permissionName, $viewName, $type)
+if (!function_exists('view_or_error')) {
+    function view_or_error($permissionName, $viewName, $type)
     {
         if (!is_can_create($permissionName)) {
             return view('backend.errors.401');
@@ -689,14 +690,14 @@ if (!function_exists('viewOrError')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('getActionColumn')) {
-    function getActionColumn($datatable, $can_edit, $can_delete, $can_restore, $can_force_delete, $trash)
+if (!function_exists('get_action_column')) {
+    function get_action_column($datatable, $can_edit, $can_delete, $can_restore, $can_force_delete, $trash)
     {
         $datatable->addColumn('action', function ($row) use ($can_edit, $can_delete, $can_restore, $can_force_delete, $trash) {
             if ($trash) {
-                return trashActionLinks($row, $can_restore, $can_force_delete);
+                return trash_action_links($row, $can_restore, $can_force_delete);
             } else {
-                return actionLinks($row, $row->adminPrefix, $can_edit, $can_delete);
+                return action_links($row, $row->adminPrefix, $can_edit, $can_delete);
             }
         });
     }
@@ -739,8 +740,8 @@ if (!function_exists('list_of_menu_error_items')) {
 }
 /*---------------------------------- </> --------------------------------*/
 
-if (!function_exists('displayVisitsCount')) {
-    function displayVisitsCount($value)
+if (!function_exists('display_visits_count')) {
+    function display_visits_count($value)
     {
         if ($value > 1000000) {
             $number = $value / 1000000;
