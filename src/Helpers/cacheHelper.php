@@ -61,7 +61,7 @@ if (!function_exists('get_from_cache_by_slug')) {
      * @throws \Psr\SimpleCache\InvalidArgumentException
      * @return mixed
      */
-    function get_from_cache_by_slug($slug, $model = "App\\Page")
+    function get_from_cache_by_slug($slug, $model = "App\\Models\\Page")
     {
 
         $key = get_cache_key($slug, $model);
