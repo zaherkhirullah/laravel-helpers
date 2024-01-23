@@ -101,7 +101,7 @@ if (!function_exists('get_model_name_by_class')) {
      *
      * @return mixed
      */
-    function get_model_name_by_class($className = null, $namespace = 'App\\')
+    function get_model_name_by_class($className = null, $namespace = 'App\\Models\\')
     {
         $name = str_replace($namespace, '', $className);
         $name = Str::lower($name);
